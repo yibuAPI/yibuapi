@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN" style="--vsc-domain: &quot;yibuapi-index.yiboot.com&quot;;"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini API - 强大的AI能力接入</title>
+    <title>一步API - 智能未来，触手可及</title>
     <style>
         * {
             margin: 0;
@@ -12,380 +10,1376 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #212529;
         }
 
-        .container {
+        /* 主要内容区域 */
+        .main-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 英雄区域 */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideUp 1s ease 0.2s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideUp 1s ease 0.4s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: slideUp 1s ease 0.6s forwards;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.3);
+        }
+
+        /* 充值说明区域 */
+        .recharge-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0 3rem 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .recharge-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recharge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .recharge-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.1);
+            border-color: #007bff;
+        }
+
+        .recharge-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .recharge-card.highlight {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+        }
+
+        .recharge-card.highlight::before {
+            background: linear-gradient(90deg, #28a745, #20c997);
+        }
+
+        .recharge-card.highlight:hover {
+            border-color: #28a745;
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.15);
+        }
+
+        .recharge-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 123, 255, 0.1);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .recharge-card.highlight .recharge-icon {
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .recharge-content {
+            flex: 1;
+        }
+
+        .recharge-rate {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.3rem;
+        }
+
+        .recharge-desc {
+            font-size: 0.9rem;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+        /* 联系充值区域 */
+        .contact-recharge {
+            margin-top: 3rem;
+            background: linear-gradient(135deg, #e7f3ff 0%, #cce7ff 100%);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-recharge::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 123, 255, 0.05) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .contact-recharge-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-recharge h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-recharge p {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .contact-btn.primary {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .contact-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+        }
+
+        .contact-btn.secondary {
+            background: white;
+            color: #007bff;
+            border: 2px solid #007bff;
+        }
+
+        .contact-btn.secondary:hover {
+            background: #007bff;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-icon {
+            font-size: 1.1rem;
+        }
+
+        /* 分组优惠策略区域 */
+        .pricing-strategy-section {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-strategy-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #0056b3, #28a745, #ffc107);
+        }
+
+        .strategy-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .strategy-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #007bff, #28a745);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .strategy-subtitle {
+            font-size: 1.1rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
 
-        header {
+        .strategy-item {
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 18px;
+            padding: 2rem 1.5rem;
             text-align: center;
-            padding: 60px 20px;
-            color: white;
-        }
-
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-        }
-
-        .api-demo {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            margin: 40px 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .api-demo h2 {
-            font-size: 2em;
-            margin-bottom: 30px;
-            color: #667eea;
-            text-align: center;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: #555;
-        }
-
-        .input-group input,
-        .input-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-        }
-
-        .input-group input:focus,
-        .input-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .input-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .notice {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 14px 40px;
-            font-size: 1.1em;
-            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: block;
-            margin: 20px auto;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        .strategy-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
         }
 
-        .btn:active {
-            transform: translateY(0);
+        .strategy-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.15);
+            border-color: #007bff;
         }
 
-        .output {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            min-height: 100px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        .strategy-item:hover::before {
+            left: 100%;
         }
 
-        .use-cases {
+        .strategy-item.featured {
+            border-color: #ff6b6b;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+            transform: scale(1.05);
+        }
+
+        .strategy-item.featured:hover {
+            transform: translateY(-8px) scale(1.07);
+            box-shadow: 0 25px 50px rgba(255, 107, 107, 0.2);
+        }
+
+        .strategy-item.recommended {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+            transform: scale(1.03);
+        }
+
+        .strategy-item.recommended:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(40, 167, 69, 0.2);
+        }
+
+        .strategy-item.premium {
+            border-color: #ffd700;
+            background: linear-gradient(135deg, #fffbf0 0%, #ffffff 100%);
+        }
+
+        .strategy-item.premium:hover {
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            border-color: #ffc107;
+        }
+
+        .strategy-badge {
+            position: absolute;
+            top: -8px;
+            right: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #ff5252);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .strategy-item.recommended .strategy-badge {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .strategy-item.premium .strategy-badge {
+            background: linear-gradient(45deg, #ffd700, #ffc107);
+            color: #212529;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .strategy-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .strategy-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+        }
+
+        .strategy-item.featured .strategy-price {
+            color: #ff6b6b;
+            text-shadow: 0 2px 4px rgba(255, 107, 107, 0.1);
+        }
+
+        .strategy-item.recommended .strategy-price {
+            color: #28a745;
+            text-shadow: 0 2px 4px rgba(40, 167, 69, 0.1);
+        }
+
+        .strategy-item.premium .strategy-price {
+            color: #ffc107;
+            text-shadow: 0 2px 4px rgba(255, 193, 7, 0.1);
+        }
+
+        .strategy-desc {
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .strategy-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .feature-tag {
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .strategy-item.featured .feature-tag {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+            border-color: rgba(255, 107, 107, 0.2);
+        }
+
+        .strategy-item.recommended .feature-tag {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border-color: rgba(40, 167, 69, 0.2);
+        }
+
+        .strategy-item.premium .feature-tag {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border-color: rgba(255, 193, 7, 0.2);
+        }
+
+        .feature-tag:hover {
+            transform: scale(1.05);
+        }
+
+        /* 网格布局 */
+        .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
-        .use-case {
+        .grid-container .section-header {
+            grid-column: 1 / -1;
+        }
+
+        .grid-item {
             background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e9ecef;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: cardAnimation 0.8s ease forwards;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
-        .use-case:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        .grid-item:nth-child(1) { animation-delay: 0.1s; }
+        .grid-item:nth-child(2) { animation-delay: 0.2s; }
+        .grid-item:nth-child(3) { animation-delay: 0.3s; }
+        .grid-item:nth-child(4) { animation-delay: 0.4s; }
+        .grid-item:nth-child(5) { animation-delay: 0.5s; }
+        .grid-item:nth-child(6) { animation-delay: 0.6s; }
+        .grid-item:nth-child(7) { animation-delay: 0.7s; }
+        .grid-item:nth-child(8) { animation-delay: 0.8s; }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #007bff;
         }
 
-        .use-case h3 {
-            color: #667eea;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-
-        .use-case p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-
-        .faq {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            margin: 40px 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .faq h2 {
-            font-size: 2em;
-            margin-bottom: 30px;
-            color: #667eea;
-            text-align: center;
-        }
-
-        .faq-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-
-        .faq-item h4 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        .faq-item p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
+        .grid-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
             color: white;
-            opacity: 0.9;
         }
 
-        .loading {
-            display: none;
-            text-align: center;
-            color: #667eea;
+        .grid-title {
+            font-size: 1.4rem;
             font-weight: 600;
+            color: #212529;
+            margin-bottom: 1rem;
+        }
+
+        .grid-description {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* 特色区域 */
+        .features-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: center;
+        }
+
+        .feature-content {
+            opacity: 0;
+            animation: slideRight 1s ease 0.8s forwards;
+        }
+
+        .feature-image {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            opacity: 0;
+            animation: slideLeft 1s ease 1s forwards;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            font-size: 1.1rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* 通用区域样式 */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        /* 合作客户区域 - 修改后的样式 */
+        .cases-section {
+            margin-bottom: 4rem;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .case-item {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .case-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #007bff;
+        }
+
+        /* 修改：logo和title在一行显示 */
+        .case-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .case-logo img {
+            /* 关键修改：让图片完全填满容器 */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 12px;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+
+        .case-item:hover .case-logo img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .case-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #212529;
+            margin: 0;
+            flex: 1;
+        }
+
+        .case-description {
+            color: #6c757d;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .case-metrics {
+            color: #007bff;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* 企业服务区域 */
+        .enterprise-section {
+            background: white;
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-item h4 {
+            color: #212529;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-item p {
+            color: #6c757d;
+            line-height: 1.5;
+        }
+
+        /* CTA区域 */
+        .cta-section {
+            background: linear-gradient(135deg, #e7f3ff 0%, #cce7ff 100%);
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .cta-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+        }
+
+        /* 联系方式容器 */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            color: #495057;
+            font-size: 1rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 二维码区域 */
+        .qr-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .qr-item {
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .qr-code:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .qr-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* 动画 */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes cardAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .features-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .feature-title, .section-title, .cta-title {
+                font-size: 2rem;
+            }
+
+            .main-container {
+                padding: 1rem;
+            }
+
+            .stats-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-item {
+                font-size: 0.9rem;
+                padding: 0.7rem 1rem;
+            }
+
+            .qr-code {
+                width: 90px;
+                height: 90px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .recharge-info {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 200px;
+                justify-content: center;
+            }
+
+            .strategy-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .strategy-item.recommended:hover {
+                transform: translateY(-5px) scale(1.02);
+            }
+
+            .enterprise-section, .cta-section, .pricing-strategy-section {
+                padding: 2rem 1rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .qr-container {
+                gap: 3rem;
+            }
+
+            /* 移动端合作客户区域调整 */
+            .case-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+
+            .case-logo {
+                width: 50px;
+                height: 50px;
+                margin: 0 auto;
+            }
+
+            .case-title {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>🚀 Gemini API</h1>
-            <p>强大的AI能力，轻松集成到您的应用中</p>
-        </div>
-    </header>
+    <!-- 主要内容 -->
+    <div class="main-container">
+        <!-- 英雄区域 -->
+        <section class="hero-section">
+            <h1 class="hero-title">一步API - 企业级AI解决方案</h1>
+            <p class="hero-subtitle">一步API专注AI技术创新，提供稳定高效的企业级API服务，助力企业数字化转型，提升业务效率，降低运营成本，实现智能化升级</p>
+            <div class="hero-buttons">
+                <a href="#free-consultation" class="cta-button">申请企业试用</a>
+                <a href="https://yibuapi.apifox.cn/6191621m0" target="_blank" class="cta-button">开发文档</a>
+            </div>
+        </section>
 
-    <div class="container">
-        <div class="api-demo">
-            <h2>💻 在线体验</h2>
-            <div class="notice">
-                ⚠️ 密钥仅在浏览器端存储，不做转发，确保您的数据安全
+        <!-- 分组优惠策略区域 -->
+        <section class="pricing-strategy-section">
+            <div class="strategy-header">
+                <h2 class="strategy-title">🎯 一步API分组优惠策略</h2>
+                <p class="strategy-subtitle">多种渠道分组选择，满足不同场景需求</p>
+                
+                <!-- 充值说明 -->
+                <div class="recharge-info">
+                    <div class="recharge-card">
+                        <div class="recharge-icon">💰</div>
+                        <div class="recharge-content">
+                            <div class="recharge-rate">充值比例：￥1 = $1</div>
+                            <div class="recharge-desc">人民币对美元1:1充值，汇率优势明显</div>
+                        </div>
+                    </div>
+                    <div class="recharge-card highlight">
+                        <div class="recharge-icon">🎁</div>
+                        <div class="recharge-content">
+                            <div class="recharge-rate">批量优惠</div>
+                            <div class="recharge-desc">充值金额越大享受更多折扣优惠</div>
+                        </div>
+                    </div>
+                    <div class="recharge-card">
+                        <div class="recharge-icon">👥</div>
+                        <div class="recharge-content">
+                            <div class="recharge-rate">专属服务</div>
+                            <div class="recharge-desc">量大客户联系客服获取定制方案</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="input-group">
-                <label>API密钥</label>
-                <input type="password" id="apiKey" placeholder="输入您的API密钥">
+            <div class="strategy-grid">
+                <div class="strategy-item featured">
+                    <div class="strategy-badge">🎉 活动</div>
+                    <div class="strategy-name">特价分组</div>
+                    <div class="strategy-price">官方10%价格</div>
+                    <div class="strategy-desc">限时活动专享超低价！</div>
+                    <div class="strategy-features">
+                        <span class="feature-tag">🎊 活动专享</span>
+                        <span class="feature-tag">⚡ 限时优惠</span>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-badge">💎 超值</div>
+                    <div class="strategy-name">逆向分组</div>
+                    <div class="strategy-price">官方17%价格</div>
+                    <div class="strategy-desc">经济实惠的明智选择！</div>
+                    <div class="strategy-features">
+                        <span class="feature-tag">💰 经济实惠</span>
+                        <span class="feature-tag">📊 成本优化</span>
+                    </div>
+                </div>
+                <div class="strategy-item recommended">
+                    <div class="strategy-badge">⭐ 推荐</div>
+                    <div class="strategy-name">default分组</div>
+                    <div class="strategy-price">官方27%价格</div>
+                    <div class="strategy-desc">均衡性价比，普遍推荐！</div>
+                    <div class="strategy-features">
+                        <span class="feature-tag">⭐ 普遍推荐</span>
+                        <span class="feature-tag">⚖️ 均衡选择</span>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-badge">🚀 增强</div>
+                    <div class="strategy-name">plus分组</div>
+                    <div class="strategy-price">官方34%价格</div>
+                    <div class="strategy-desc">增强版本，功能更全面！</div>
+                    <div class="strategy-features">
+                        <span class="feature-tag">🔧 功能增强</span>
+                        <span class="feature-tag">⚡ 性能提升</span>
+                    </div>
+                </div>
+                <div class="strategy-item">
+                    <div class="strategy-badge">🏢 高并发</div>
+                    <div class="strategy-name">企业渠道</div>
+                    <div class="strategy-price">官方41%价格</div>
+                    <div class="strategy-desc">高并发企业级专用！</div>
+                    <div class="strategy-features">
+                        <span class="feature-tag">🚀 高并发</span>
+                        <span class="feature-tag">🏢 企业专用</span>
+                    </div>
+                </div>
+                <div class="strategy-item premium">
+                    <div class="strategy-badge">👑 官方</div>
+                    <div class="strategy-name">官key渠道</div>
+                    <div class="strategy-price">官方61%价格</div>
+                    <div class="strategy-desc">功能与官方完全一致</div>
+                    <div class="strategy-features">
+                        <span class="feature-tag">✅ 官方一致</span>
+                        <span class="feature-tag">🛡️ 最高稳定</span>
+                    </div>
+                </div>
             </div>
-
-            <div class="input-group">
-                <label>提示词</label>
-                <textarea id="prompt" placeholder="例如：帮我写一首关于春天的诗"></textarea>
-            </div>
-
-            <button class="btn" onclick="callAPI()">发送请求</button>
             
-            <div class="loading" id="loading">正在处理中...</div>
-            
-            <div class="output" id="output">API响应将显示在这里...</div>
-        </div>
-
-        <h2 style="color: white; text-align: center; font-size: 2.5em; margin: 60px 0 40px;">🎯 应用场景</h2>
-        
-        <div class="use-cases">
-            <div class="use-case">
-                <div class="icon">💬</div>
-                <h3>智能客服</h3>
-                <p>自动回答用户常见问题，提供24小时不间断服务，减轻人工客服压力。</p>
+            <!-- 联系充值区域 -->
+            <div class="contact-recharge">
+                <div class="contact-recharge-content">
+                    <h3>💎 需要充值或定制服务？</h3>
+                    <p>联系我们的专业客服团队，获取专属优惠方案和技术支持</p>
+                    <div class="contact-buttons">
+                        <a href="#free-consultation" class="contact-btn primary">
+                            <span class="btn-icon">💬</span>
+                            立即咨询充值
+                        </a>
+                        <a href="#free-consultation" class="contact-btn secondary">
+                            <span class="btn-icon">📞</span>
+                            联系客服
+                        </a>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="use-case">
-                <div class="icon">✍️</div>
-                <h3>内容创作</h3>
-                <p>快速生成社交媒体文案、产品描述、营销材料，提升内容创作效率。</p>
+        <!-- 网格区域 -->
+        <section class="grid-container">
+            <div class="section-header" style="grid-column: 1 / -1; margin-bottom: 2rem;">
+                <h2 class="section-title">为什么选择一步API？</h2>
+                <p class="section-subtitle">八大核心优势，助力企业AI转型升级</p>
             </div>
+            <div class="grid-item">
+                <div class="grid-icon">🤝</div>
+                <h3 class="grid-title">贴心：一对一专属客服</h3>
+                <p class="grid-description">一步API专业技术团队7x24小时服务，快速响应客户需求，提供个性化解决方案，确保业务无忧运行。</p>
+            </div>
+            <div class="grid-item">
+                <div class="grid-icon">🚀</div>
+                <h3 class="grid-title">突破：高并发，超越原厂的性能</h3>
+                <p class="grid-description">一步API自主研发高性能架构，支持百万级并发调用，响应速度比原厂提升50%，稳定性达99.9%。</p>
+            </div>
+            <div class="grid-item">
+                <div class="grid-icon">💰</div>
+                <h3 class="grid-title">折扣：企业级API折扣成本更低</h3>
+                <p class="grid-description">一步API批量采购享受企业级折扣，平均成本比市场价低40%，助力企业降本增效，提升竞争优势。</p>
+            </div>
+            <div class="grid-item">
+                <div class="grid-icon">🔄</div>
+                <h3 class="grid-title">最新：实时同步支持最新大模型</h3>
+                <p class="grid-description">一步API第一时间支持GPT-4、Claude、Gemini等最新AI模型，确保企业始终使用最先进的AI技术。</p>
+            </div>
+            <div class="grid-item">
+                <div class="grid-icon">🔒</div>
+                <h3 class="grid-title">安全：不保存任何客户数据</h3>
+                <p class="grid-description">一步API符合SOC2、ISO27001标准，采用端到端加密，不存储客户数据，确保数据安全和隐私保护。</p>
+            </div>
+            <div class="grid-item">
+                <div class="grid-icon">📋</div>
+                <h3 class="grid-title">正规：商务流程、合同、发票</h3>
+                <p class="grid-description">一步API完整商务体系，提供正规合同签署、财务发票开具，支持对公转账，满足企业合规需求。</p>
+            </div>
+            <div class="grid-item">
+                <div class="grid-icon">🎯</div>
+                <h3 class="grid-title">灵活：定制化服务方案</h3>
+                <p class="grid-description">一步API根据企业特殊需求提供定制化API接口，私有化部署选项，专业技术团队全程支持，确保完美契合业务场景。</p>
+            </div>
+            <div class="grid-item">
+                <div class="grid-icon">🏭</div>
+                <h3 class="grid-title">直接：源头直供无差价</h3>
+                <p class="grid-description">一步API直接对接AI模型供应商，去除中间商环节，API调用价格更优惠，响应速度更快捷，服务质量更可靠。</p>
+            </div>
+        </section>
 
-            <div class="use-case">
-                <div class="icon">🔍</div>
-                <h3>图像识别</h3>
-                <p>分析商品图片质量，自动识别瑕疵产品，提高商品质检效率。</p>
+        <!-- 特色区域 -->
+        <section class="features-section">
+            <div class="feature-content">
+                <h2 class="feature-title">驱动企业增长</h2>
+                <p class="feature-description">
+                    一步API 专注于为中大型企业提供AI赋能解决方案。我们已成功服务500+企业客户，
+                    涵盖金融、制造、零售、医疗等多个行业。通过深度集成企业现有系统，
+                    实现业务流程智能化，平均为客户节省运营成本35%，提升业务效率60%。
+                </p>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">企业客户</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">系统稳定性</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">35%</div>
+                        <div class="stat-label">成本节省</div>
+                    </div>
+                </div>
+                <a href="#free-consultation" class="cta-button">预约演示</a>
             </div>
+            <div class="feature-image">
+                <div style="font-size: 8rem; opacity: 0.3; color: #007bff;">🚀</div>
+            </div>
+        </section>
 
-            <div class="use-case">
-                <div class="icon">🍽️</div>
-                <h3>美食分析</h3>
-                <p>自动识别餐品内容，生成营养分析和口味描述，丰富菜单信息。</p>
+        <!-- 合作客户区域 - 修改后的结构，添加小米 -->
+        <section class="cases-section">
+            <div class="section-header">
+                <h2 class="section-title">一步API合作客户</h2>
+                <p class="section-subtitle">深耕AI领域，提供专业AI解决方案</p>
             </div>
+            <div class="cases-grid">
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/alibaba-logo.jpg" alt="阿里巴巴">
+                        </div>
+                        <h4 class="case-title">阿里巴巴</h4>
+                    </div>
+                    <p class="case-description">一步API智能推荐系统提升用户粘性40%，交易转化率增长55%</p>
+                    <div class="case-metrics">活跃用户: 10亿+人</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/tengxun-logo.jpg" alt="腾讯">
+                        </div>
+                        <h4 class="case-title">腾讯</h4>
+                    </div>
+                    <p class="case-description">一步API智能游戏匹配系统优化用户体验，游戏留存率提升45%</p>
+                    <div class="case-metrics">活跃用户: 12亿+人</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/zijietiaodong-logo.jpg" alt="字节跳动">
+                        </div>
+                        <h4 class="case-title">字节跳动</h4>
+                    </div>
+                    <p class="case-description">一步API视频推荐算法提升用户观看时长60%，广告收入增长80%</p>
+                    <div class="case-metrics">日活用户: 8亿+人</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/xiaomi-logo.jpg" alt="小米">
+                        </div>
+                        <h4 class="case-title">小米</h4>
+                    </div>
+                    <p class="case-description">一步API智能IoT设备管理系统提升设备联动效率70%，用户体验满意度达95%</p>
+                    <div class="case-metrics">IoT设备: 5亿+台</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/zhaoshangyinhang-logo.jpg" alt="招商银行">
+                        </div>
+                        <h4 class="case-title">招商银行</h4>
+                    </div>
+                    <p class="case-description">一步API智能客服机器人处理90%常见问题，客户满意度提升38%</p>
+                    <div class="case-metrics">服务客户: 1.7亿+人</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/wangyi-logo.jpg" alt="网易">
+                        </div>
+                        <h4 class="case-title">网易</h4>
+                    </div>
+                    <p class="case-description">一步API音乐推荐引擎提升用户满意度50%，付费转化率增长35%</p>
+                    <div class="case-metrics">音乐用户: 2亿+人</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/jingdong-logo.jpg" alt="京东">
+                        </div>
+                        <h4 class="case-title">京东</h4>
+                    </div>
+                    <p class="case-description">一步API智能物流调度系统降低配送成本25%，配送效率提升40%</p>
+                    <div class="case-metrics">日订单量: 5000万+单</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/zhejiangdaxue-logo.jpg" alt="浙江大学">
+                        </div>
+                        <h4 class="case-title">浙江大学</h4>
+                    </div>
+                    <p class="case-description">一步API学术研究辅助系统加速论文分析，科研效率提升70%</p>
+                    <div class="case-metrics">服务师生: 6万+人</div>
+                </div>
+                <div class="case-item">
+                    <div class="case-header">
+                        <div class="case-logo">
+                            <img src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/home/logo/xinandaxue-logo.jpg" alt="西南大学">
+                        </div>
+                        <h4 class="case-title">西南大学</h4>
+                    </div>
+                    <p class="case-description">一步API智能教学系统个性化学习方案，学生成绩提升率达85%</p>
+                    <div class="case-metrics">服务学生: 5万+人</div>
+                </div>
+            </div>
+        </section>
 
-            <div class="use-case">
-                <div class="icon">🎨</div>
-                <h3>创意设计</h3>
-                <p>根据文字描述生成插画、海报和设计草图，激发创意灵感。</p>
+        <!-- 企业服务区域 -->
+        <section class="enterprise-section">
+            <div class="enterprise-content">
+                <h2 class="section-title">一步API企业级服务保障</h2>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <div class="service-icon">📞</div>
+                        <h4>专属客户经理</h4>
+                        <p>1对1专属服务，快速响应业务需求</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">🔧</div>
+                        <h4>技术定制开发</h4>
+                        <p>根据企业需求定制AI解决方案</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">📚</div>
+                        <h4>培训与咨询</h4>
+                        <p>提供专业培训和咨询服务</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">⚙️</div>
+                        <h4>运维支持</h4>
+                        <p>7x24小时技术运维保障</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="use-case">
-                <div class="icon">📱</div>
-                <h3>社交媒体</h3>
-                <p>自动生成吸引人的社交媒体内容，提升帖子互动率和关注度。</p>
+        <!-- CTA区域 -->
+        <section class="cta-section" id="free-consultation">
+            <div class="cta-content">
+                <h2 class="cta-title">准备开始您的AI转型之旅？</h2>
+                <p class="cta-description">联系一步API专家团队，获取定制化解决方案</p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-button primary">免费咨询</a>
+                </div>
+                
+                <!-- 联系方式容器 -->
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            💬 客服微信：xuexiv5876
+                        </div>
+                        <div class="contact-item">
+                            📧 商务合作：yibuapi@163.com
+                        </div>
+                    </div>
+                    
+                    <div class="qr-container">
+                        <div class="qr-item">
+                            <img class="qr-code" alt="一步API微信公众号" src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/gzh/gzh.jpg">
+                            <p class="qr-label">一步API公众号</p>
+                        </div>
+                        <div class="qr-item">
+                            <img class="qr-code" alt="添加一步API客服微信" src="https://yibuapi-1320165265.cos.ap-guangzhou.myqcloud.com/yibuapi/gzh/kefuerweima.jpeg">
+                            <p class="qr-label">一步API客服</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            🏢 一步API企业级服务
+                        </div>
+                        <div class="contact-item">
+                            ⚡ 7×24小时技术支持
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="faq">
-            <h2>❓ 常见问题</h2>
-            
-            <div class="faq-item">
-                <h4>如何获取API密钥？</h4>
-                <p>您需要前往服务商官网注册账号并申请API密钥。密钥仅在您的浏览器本地存储，不会上传到服务器。</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>API的定价如何？</h4>
-                <p>价格由API服务商设定，详细的定价方案和购买方式请到服务商官网查看。通常按调用次数或Token数量计费。</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>支持哪些编程语言？</h4>
-                <p>Gemini API支持多种主流编程语言，包括Python、JavaScript、Java、Go等，提供了丰富的SDK和示例代码。</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>API响应速度如何？</h4>
-                <p>通常情况下，API响应时间在1-3秒之间，具体取决于请求的复杂度和服务器负载情况。</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>数据安全如何保障？</h4>
-                <p>所有API请求都通过HTTPS加密传输，您的API密钥仅在本地浏览器存储，不会被第三方获取。</p>
-            </div>
-        </div>
+        </section>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Gemini API. 通过实际案例了解API的强大功能</p>
-            <p>探索AI在各行业的应用潜力</p>
-        </div>
-    </footer>
-
-    <script>
-        // 从本地存储加载API密钥
-        const savedKey = localStorage.getItem('gemini_api_key');
-        if (savedKey) {
-            document.getElementById('apiKey').value = savedKey;
-        }
-
-        // 保存API密钥到本地存储
-        document.getElementById('apiKey').addEventListener('change', function() {
-            localStorage.setItem('gemini_api_key', this.value);
-        });
-
-        async function callAPI() {
-            const apiKey = document.getElementById('apiKey').value;
-            const prompt = document.getElementById('prompt').value;
-            const output = document.getElementById('output');
-            const loading = document.getElementById('loading');
-
-            if (!apiKey) {
-                output.textContent = '❌ 请输入API密钥';
-                return;
-            }
-
-            if (!prompt) {
-                output.textContent = '❌ 请输入提示词';
-                return;
-            }
-
-            loading.style.display = 'block';
-            output.textContent = '等待响应...';
-
-            try {
-                // 这里是示例代码，实际使用时需要替换为真实的API端点
-                const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + apiKey, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: prompt
-                            }]
-                        }]
-                    })
-                });
-
-                const data = await response.json();
-                
-                if (data.candidates && data.candidates[0]) {
-                    output.textContent = '✅ API响应：\n\n' + data.candidates[0].content.parts[0].text;
-                } else if (data.error) {
-                    output.textContent = '❌ 错误：' + data.error.message;
-                } else {
-                    output.textContent = '❌ 未知错误，请检查API密钥是否正确';
-                }
-            } catch (error) {
-                output.textContent = '❌ 请求失败：' + error.message + '\n\n提示：这是一个演示页面，请确保您的API密钥正确且已启用相关服务。';
-            } finally {
-                loading.style.display = 'none';
-            }
-        }
-    </script>
-</body>
-</html>
+</body></html>
