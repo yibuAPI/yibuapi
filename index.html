@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini API - 强大的AI能力接入</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .api-demo {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .api-demo h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .notice {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .output {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .use-case {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .use-case:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .use-case h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .use-case p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .faq {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .faq h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .faq-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #667eea;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🚀 Gemini API</h1>
+            <p>强大的AI能力，轻松集成到您的应用中</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="api-demo">
+            <h2>💻 在线体验</h2>
+            <div class="notice">
+                ⚠️ 密钥仅在浏览器端存储，不做转发，确保您的数据安全
+            </div>
+            
+            <div class="input-group">
+                <label>API密钥</label>
+                <input type="password" id="apiKey" placeholder="输入您的API密钥">
+            </div>
+
+            <div class="input-group">
+                <label>提示词</label>
+                <textarea id="prompt" placeholder="例如：帮我写一首关于春天的诗"></textarea>
+            </div>
+
+            <button class="btn" onclick="callAPI()">发送请求</button>
+            
+            <div class="loading" id="loading">正在处理中...</div>
+            
+            <div class="output" id="output">API响应将显示在这里...</div>
+        </div>
+
+        <h2 style="color: white; text-align: center; font-size: 2.5em; margin: 60px 0 40px;">🎯 应用场景</h2>
+        
+        <div class="use-cases">
+            <div class="use-case">
+                <div class="icon">💬</div>
+                <h3>智能客服</h3>
+                <p>自动回答用户常见问题，提供24小时不间断服务，减轻人工客服压力。</p>
+            </div>
+
+            <div class="use-case">
+                <div class="icon">✍️</div>
+                <h3>内容创作</h3>
+                <p>快速生成社交媒体文案、产品描述、营销材料，提升内容创作效率。</p>
+            </div>
+
+            <div class="use-case">
+                <div class="icon">🔍</div>
+                <h3>图像识别</h3>
+                <p>分析商品图片质量，自动识别瑕疵产品，提高商品质检效率。</p>
+            </div>
+
+            <div class="use-case">
+                <div class="icon">🍽️</div>
+                <h3>美食分析</h3>
+                <p>自动识别餐品内容，生成营养分析和口味描述，丰富菜单信息。</p>
+            </div>
+
+            <div class="use-case">
+                <div class="icon">🎨</div>
+                <h3>创意设计</h3>
+                <p>根据文字描述生成插画、海报和设计草图，激发创意灵感。</p>
+            </div>
+
+            <div class="use-case">
+                <div class="icon">📱</div>
+                <h3>社交媒体</h3>
+                <p>自动生成吸引人的社交媒体内容，提升帖子互动率和关注度。</p>
+            </div>
+        </div>
+
+        <div class="faq">
+            <h2>❓ 常见问题</h2>
+            
+            <div class="faq-item">
+                <h4>如何获取API密钥？</h4>
+                <p>您需要前往服务商官网注册账号并申请API密钥。密钥仅在您的浏览器本地存储，不会上传到服务器。</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>API的定价如何？</h4>
+                <p>价格由API服务商设定，详细的定价方案和购买方式请到服务商官网查看。通常按调用次数或Token数量计费。</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>支持哪些编程语言？</h4>
+                <p>Gemini API支持多种主流编程语言，包括Python、JavaScript、Java、Go等，提供了丰富的SDK和示例代码。</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>API响应速度如何？</h4>
+                <p>通常情况下，API响应时间在1-3秒之间，具体取决于请求的复杂度和服务器负载情况。</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>数据安全如何保障？</h4>
+                <p>所有API请求都通过HTTPS加密传输，您的API密钥仅在本地浏览器存储，不会被第三方获取。</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Gemini API. 通过实际案例了解API的强大功能</p>
+            <p>探索AI在各行业的应用潜力</p>
+        </div>
+    </footer>
+
+    <script>
+        // 从本地存储加载API密钥
+        const savedKey = localStorage.getItem('gemini_api_key');
+        if (savedKey) {
+            document.getElementById('apiKey').value = savedKey;
+        }
+
+        // 保存API密钥到本地存储
+        document.getElementById('apiKey').addEventListener('change', function() {
+            localStorage.setItem('gemini_api_key', this.value);
+        });
+
+        async function callAPI() {
+            const apiKey = document.getElementById('apiKey').value;
+            const prompt = document.getElementById('prompt').value;
+            const output = document.getElementById('output');
+            const loading = document.getElementById('loading');
+
+            if (!apiKey) {
+                output.textContent = '❌ 请输入API密钥';
+                return;
+            }
+
+            if (!prompt) {
+                output.textContent = '❌ 请输入提示词';
+                return;
+            }
+
+            loading.style.display = 'block';
+            output.textContent = '等待响应...';
+
+            try {
+                // 这里是示例代码，实际使用时需要替换为真实的API端点
+                const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + apiKey, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.candidates && data.candidates[0]) {
+                    output.textContent = '✅ API响应：\n\n' + data.candidates[0].content.parts[0].text;
+                } else if (data.error) {
+                    output.textContent = '❌ 错误：' + data.error.message;
+                } else {
+                    output.textContent = '❌ 未知错误，请检查API密钥是否正确';
+                }
+            } catch (error) {
+                output.textContent = '❌ 请求失败：' + error.message + '\n\n提示：这是一个演示页面，请确保您的API密钥正确且已启用相关服务。';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
